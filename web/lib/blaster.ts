@@ -50,7 +50,7 @@ export enum EventType {
 export class EventSleep {
 	ms: number
 
-	constructor({ms}) {
+	constructor({ms}: {ms: number}) {
 		this.ms = ms;
 	}
 }
@@ -59,7 +59,7 @@ export class EventSignal {
 	public protocol: Protocols;
 	public code: number;
 
-	constructor({protocol, code}) {
+	constructor({protocol, code}: {protocol: Protocols, code: number}) {
 		this.protocol = protocol;
 		this.code = code;
 	}
@@ -69,7 +69,7 @@ export class BlasterEvent {
 	type: EventType
 	data: EventSleep|EventSignal
 
-	constructor({type, data}) {
+	constructor({type, data}: {type: EventType, data: EventSleep|EventSignal}) {
 		this.type = type;
 		this.data = data;
 	}
@@ -85,7 +85,7 @@ class IRBlaster extends EventEmitter implements IIRBlaster {
 	mqttClient: MqttClient
 	topics: LocalTopics<FriendlyName>
 
-	constructor(mqttClient, friendlyName) {
+	constructor(mqttClient: MqttClient, friendlyName: string) {
 		super();
 
 		this.EVENT_INVALID_MESSAGE = 'event-invalid-message';

@@ -3,17 +3,17 @@ import {IIRBlaster} from './blaster.d';
 import IRBlaster from './blaster.js';
 
 const ReservedTopics = ['ping'];
-type OnBlasterCallback = (IRBlaster) => void
+type OnBlasterCallback = (blaster: IRBlaster) => void
 
 class IRBlasterScanner implements IRBlasterScanner {
 	_callback: OnBlasterCallback
 	_clients: IIRBlaster[]
 	mqttClient: MqttClient
 
-	constructor(mqttServerIp, callback) {
+	constructor(mqttServerIp: string, callback: OnBlasterCallback) {
 		this._callback = callback;
 		this._clients = [];
-		const clientNames = [];
+		const clientNames: string[] = [];
 
 		const options = {
 			clean: true,
